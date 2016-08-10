@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>FYG Financial Journey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <style>
+/* Apply reset.css */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+/* End reset.css */
+
+
+/* CSS INTRO ANIMATIONS */
+@keyframes rotate {
+  0%, 50% {
+    transform: rotate(0deg) translateY(-230px) rotate(0deg);
+  }
+}
+@keyframes fadein {
+  0% { opacity: 0; }
+  60% { opacity: 0; }
+  100%{ opacity: 1; }
+}
+/* Body, Text & images */
+html{
+  width: 100%;
+  height: 100%;
+  background: #FDFDFF;
+  font-family: Arial, sans-serif;
+}
+body{
+  height: 100%;
+}
+#wrap{
+  min-width: 660px;
+  max-width: 1280px;
+  width: 100%;
+  min-height: 760px;
+  max-height: 980px;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+h1{
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #002a55;
+}
+h2{
+  font-size: 2.4em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.textbox li{
+  font-size: 1.4em;
+  margin: 14px 0;
+}
+#top-title{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+#bottom-title{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+#red-text{
+  color: #FF3C14;
+}
+
+#logo{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 160px;
+}
+
+/* Page effects */
+.textbox{
+  border: 3px solid black;
+  border-radius: 20px;
+  position: absolute;
+  width: 70%;
+  max-width: 660px;
+  min-width: 480px;
+  top: -60%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  opacity: 0;
+  background: #e5f2ff;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+  padding: 20px 25px;
+}
+
+.close{
+  width: 30px;
+  height: 30px;
+  font-size: 3em;
+  text-align: center;
+  line-height: 30px;
+  transition: color 0.4s;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.close:hover{
+  cursor: pointer;
+  color: white;
+}
+
+.node-title{
+  position: relative;
+  font-size: 24px;
+  font-weight: bold;
+  color: #002a55;
+  width: 290px;
+  animation: fadein 3.5s ease-in 1;
+}
+
+#graphic{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: rotateZ(0.01deg); /* IE 10 bug */
+}
+
+.circle{
+  border-radius: 50%;
+  position: absolute;
+}
+
+.middle{
+  background: radial-gradient(ellipse at center, #e5f2ff 0%,#002a55 100%);
+  height: 460px;
+  width: 460px;
+  top: -230px;
+  left: -230px;
+}
+
+.outer{
+  height: 90px;
+  width: 90px;
+  background-color: #FF3C14;
+  border: 5px solid #FDFDFF;
+  background-clip: content-box;
+  top: -45px;
+  left: -45px;
+  animation: rotate 2.5s ease-in-out 1;
+  /* stop button highlight on touch - android mobile */
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+.outer:not(.no-hover):hover{
+  background-color: #FF781E;
+  cursor: pointer;
+}
+.active-node{
+  background-color: #FFE11E !important;
+}
+
+.at-12-oclock{
+  transform: rotate(0deg) translateY(-230px) rotate(0deg);
+  z-index: 2;
+}
+.at-12-oclock .node-title{
+  text-align: center;
+  top: -30px;
+  left: -110px;
+}
+
+.at-2-oclock {
+	transform: rotate(60deg) translateY(-230px) rotate(-60deg);
+	z-index: 1;
+}
+.at-2-oclock .node-title{
+  left: 85px;
+}
+
+.at-4-oclock {
+	transform: rotate(120deg) translateY(-230px) rotate(-120deg);
+}
+.at-4-oclock .node-title{
+  left: 90px;
+  top: 50px;
+}
+
+.at-6-oclock {
+	transform: rotate(180deg) translateY(-230px) rotate(-180deg);
+}
+.at-6-oclock .node-title{
+  text-align: center;
+  top: 90px;
+  left: -100px;
+}
+
+.at-8-oclock {
+	transform: rotate(-120deg) translateY(-230px) rotate(120deg);
+}
+.at-8-oclock .node-title{
+  text-align: right;
+  left: -300px;
+  top: 50px;
+}
+
+.at-10-oclock {
+	transform: rotate(-60deg) translateY(-230px) rotate(60deg);
+}
+.at-10-oclock .node-title{
+  text-align: right;
+  left: -290px;
+}
+
+.circle-arrow {
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  border: 6px dashed white;
+  border-top-color: transparent;
+  transform: rotate(-30deg);
+  z-index: 9;
+  position: relative;
+  top: 69px;
+  left: 69px;
+  opacity: 0.5;
+}
+.arrow-head {
+  border: 6px solid white;
+  width: 12px;
+  height: 12px;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  position: absolute;
+  left: 28px;
+  top: 34px;
+  transform: rotate(90deg);
+  z-index: 9;
+}
+
+/* media queries for small screens */
+@media screen and (max-width: 1010px) , screen and (max-height: 760px) {
+  #wrap{
+    transform: scale(0.85);
+    transform-origin: top;
+  }
+  #top-title{
+    left: -60px;
+  }
+  #bottom-title{
+    right: -60px;
+  }
+  #logo{
+    right: -60px;
+  }
+}
+@media screen and (max-width: 850px) , screen and (max-height: 646px) {
+  #wrap{
+    transform: scale(0.75);
+    transform-origin: top;
+  }
+  #top-title{
+    left: -100px;
+  }
+  #bottom-title{
+    right: -100px;
+  }
+  #logo{
+    right: -100px;
+  }
+}
+@media screen and (max-width: 750px) , screen and (max-height: 570px) {
+  #wrap{
+    transform: scale(0.65);
+    transform-origin: top;
+  }
+    #top-title{
+    left: -170px;
+  }
+  #bottom-title{
+    right: -170px;
+  }
+  #logo{
+    right: -170px;
+  }
+}
+@media screen and (max-width: 650px) , screen and (max-height: 495px) {
+  #wrap{
+    transform: scale(0.55);
+    transform-origin: top;
+    min-width: 440px;
+  }
+  #top-title{
+    left: -220px;
+  }
+  #bottom-title{
+    right: -220px;
+  }
+  #logo{
+    right: -220px;
+  }
+}
+@media screen and (max-width: 550px) , screen and (max-height: 418px) {
+  #wrap{
+    transform: scale(0.45);
+    transform-origin: top;
+    min-width: 440px;
+  }
+  #top-title{
+    left: -270px;
+  }
+  #bottom-title{
+    right: -270px;
+  }
+  #logo{
+    right: -270px;
+  }
+}
+
+
+    </style>
+
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+    
+  </head>
+
+  <body>
+
+    <div id="wrap">
+  <h1 id="top-title"><span id="red-text">Your</span> Financial Journey</h1>
+<img id="logo" src="FYG.png" alt="FYG logo">
+
+<div class="textbox n1">
+  <div class="close">&times;</div>
+  <h2>What's important to you?</h2>
+  <ul>
+    <li>What's important to you about your family?</li>
+    <li>What do you value most about your lifestyle?</li>
+    <li>What's important to you about your community?</li>
+    <li>What are your career goals?</li>
+    <li>How do you feel about your investments?</li>
+    <li>How important is financial protection for your family?</li>
+    <li>How does your ideal retirement look?</li>
+    <li>What are your Estate Planning goals?</li>
+  </ul>
+</div>
+<div class="textbox n2">
+  <div class="close">&times;</div>
+  <h2>Where are you now?</h2>
+  <ul>
+    <li>What are your Assets?</li>
+    <li>What are your Liabilities?</li>
+    <li>What is your annual Income?</li>
+    <li>What is your annual Expenditure?</li>
+    <li>Do you use any Business Structures?</li>
+    <li>Do you have Wills & an Estate Plan?</li>
+    <li>Do you have an enduring Power of Attorney?</li>
+  </ul>
+</div>
+<div class="textbox n3">
+  <div class="close">&times;</div>
+  <h2>What's getting in your way?</h2>
+  <ul>
+    <li>Are you paying too much tax?</li>
+    <li>Do you have a poor investment process?</li>
+    <li>Are you paying excessive fees?</li>
+    <li>Are you using an inappropriate ownership structure?</li>
+    <li>Do you have a poorly aligned asset allocation?</li>
+    <li>Do you have inadequate family protection?</li>
+    <li>Is your estate planning incomplete?</li>
+    <li>Are you missing strategic opportunities?</li>
+  </ul>
+</div>
+<div class="textbox n4">
+  <div class="close">&times;</div>
+  <h2>How can you improve your future?</h2>
+  <ul>
+    <li>Detailed projections of future cashflow</li>
+    <li>Reduce tax liabilities</li>
+    <li>Appropriate portfolio constructions</li>
+    <li>Better investment returns</li>
+    <li>Retirement income improvements</li>
+    <li>Adopting optimal strategies</li>
+    <li>Improved ownership of assets</li>
+    <li>Comprehensive estate planning</li>
+  </ul>
+</div>
+<div class="textbox n5">
+  <div class="close">&times;</div>
+  <h2>How much better could your future look?</h2>
+  <ul>
+    <li>Clear projected financial improvement</li>
+    <li>Increased future assets</li>
+    <li>Lower tax liabilities</li>
+    <li>Lower investment fees</li>
+    <li>Increased retirement income</li>
+    <li>Correct assets ownership</li>
+    <li>Adequate family insurance protection</li>
+    <li>Sound estate planning outcomes</li>
+  </ul>
+</div>
+<div class="textbox n6">
+  <div class="close">&times;</div>
+  <h2>Are you on track?</h2>
+  <ul>
+    <li>Are your tax liabilities well managed?</li>
+    <li>Are your investment fees controlled?</li>
+    <li>Is your family protected against risks?</li>
+    <li>Are your investment returns sound?</li>
+    <li>Will your estate wishes be met?</li>
+    <li>Will your investment portfolios cope with market volatility?</li>
+    <li>Do the right people own the right assets?</li>
+  </ul>
+</div>
+
+<div id="graphic">
+  <div class="middle circle">
+    <div class="circle-arrow">
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+  <div class="outer circle at-12-oclock">
+    <p class="node-title">What's important to you?</p>
+  </div>
+  <div class="outer circle at-2-oclock">
+    <p class="node-title">Where are you now?</p>
+  </div>
+  <div class="outer circle at-4-oclock">
+    <p class="node-title">What's getting in your way?</p>
+  </div>
+  <div class="outer circle at-6-oclock">
+    <p class="node-title">How can you improve your future?</p>
+  </div>
+  <div class="outer circle at-8-oclock">
+    <p class="node-title">How much better could your future look?</p>
+  </div>
+  <div class="outer circle at-10-oclock">
+    <p class="node-title">Are you on track?</p>
+  </div>
+</div>
+  <h1 id="bottom-title"><span id="red-text">...our</span> advice process</h1>
+</div>
+    
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js'></script>
+
+        <script>
+      $(document).ready(function(){
+  var big_graphic = 1;  //menu graphic is initially large
+  var selected;  //for keeping track of selected node
+  // Clicking a node shrinks graphic, hides titles, and shows relevant text-box
+  $(".outer").click(function(){
+    if(big_graphic){
+      // determine which node is clicked
+      switch($(this).attr("class").split(" ")[2]){
+        case "at-12-oclock":
+          selected = ".n1";
+          break;
+        case "at-2-oclock":
+          selected = ".n2";
+          break;
+        case "at-4-oclock":
+          selected = ".n3";
+          break;
+        case "at-6-oclock":
+          selected = ".n4";
+          break;
+        case "at-8-oclock":
+          selected = ".n5";
+          break;
+        default:
+          selected = ".n6"
+      }
+      // move and shrink graphic
+      $("#graphic").velocity(
+        {opacity: 0.5,
+         top: "90%",
+         scale: "0.3"
+        }, 
+        800, 
+        "swing"
+      );
+      // hide titles
+      $(".node-title").velocity(
+          {opacity: 0},
+          800
+      );
+      // bring in content textbox
+      $(selected).velocity(
+        {opacity: 1,
+         top: "15%"
+        },
+        1200,
+        "swing"
+      );
+      // highlight active node, disable hover on others
+      $(this).addClass("active-node");
+      $(".outer").addClass("no-hover");
+      // variable to track state of menu graphic
+      big_graphic = 0;
+    }
+    /* 
+    // Not needed when 'click outside textbox' feature is used
+    else{  //reset graphic and titles to full-size
+      resetMenu(selected);
+    } */
+  });
+  // Clicking outside textbox modal closes it and resets menu
+  // uses opacity of menu graphic to condition the click
+  $("html").click(function(e){
+    if($('#graphic').css("opacity")<1 && !$(e.target).closest(".textbox").length){
+      resetMenu(selected);
+    }
+  });
+  // Clicking textbox [X] resets menu (only visible when graphic is small)
+  $(".close").click(function(){
+    if(!big_graphic){
+      resetMenu(selected);
+    }
+  });    
+  // FUNCTION to close textbox and reset graphic to full-size
+  function resetMenu(selectedNode){
+    $(".outer").removeClass("active-node no-hover");
+    $("#graphic").velocity("reverse");
+    $(".node-title").velocity("reverse");
+    $(selectedNode).velocity("reverse");
+    big_graphic = 1;
+    selected = 0;
+  } 
+});
+    </script>
+
+    
+    
+    
+  </body>
+</html>
